@@ -48,7 +48,6 @@ const ArrayGroup = () => {
       <ObjectName />
 
       <span>
-        {/* TODO: Make this more acdcurate potentially */}
         <ObjectMeta rowHovered={false} />
       </span>
       {[...Array(numGroups)].map((_, i) => {
@@ -104,9 +103,13 @@ const ArrayGroup = () => {
                     depth,
                     namespace,
                     type,
-                    value: (value as Json[]).slice(i * size, i * size + size),
+                    value,
                     parentType,
                     parentObj,
+                    subArray: (value as Json[]).slice(
+                      i * size,
+                      i * size + size,
+                    ),
                   }}
                 >
                   <JsonObject
