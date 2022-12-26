@@ -5,13 +5,16 @@ on:
     branches:
     - master
   push:
+    branches:
+    - master
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
         with:
           node-version: 18
       - name: Cache node modules
@@ -25,7 +28,12 @@ jobs:
         with:
           version: 7.8.0
 
-      - run: pnpm install
-      - run: pnpm run build:once
-      - run: pnpm run lint:check
+      - name: pnpm install
+        run: pnpm install
+      - name: build
+        run: pnpm run build:once
+      - name: test
+        run: pnpm run test
+      - name: lint
+        run: pnpm run lint:check
 
